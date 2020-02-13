@@ -5,6 +5,7 @@ var router = express.Router()
 
 const files = glob.sync(`${__dirname}/*.js`)
 files.forEach(file => {
+  // Prevent version index importation
   if (file.includes('index.js')) return
 
   const versionEndpoints = require(path.resolve(file))

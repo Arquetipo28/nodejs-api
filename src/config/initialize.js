@@ -1,7 +1,13 @@
+const logger = require('morgan')
+const bodyParser = require('body-parser')
 const routes = require('./routes')
 
 function initialize (app) {
   const create = () => {
+    app.use(logger('dev'))
+    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({ extended: false }))
+    // Add routes structure and handlers
     routes(app)
   }
 
