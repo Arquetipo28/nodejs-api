@@ -1,3 +1,7 @@
+const path = require('path')
+const root = path.dirname(require.main.filename)
+const loader = require(`${root}/src/controllers`)
+
 // Each resource file must be named
 // as the resource itself
 // Example: users (resource), users.js (file)
@@ -5,22 +9,14 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', (_req, res) => {
-  res.send('Using GET to resource')
-})
+const resourceName = path.basename(__filename).split('.')[0]
 
-router.put('/:id', (req, res) => {
-  const resourceId = req.params.id
-  res.send(`Using PUT to resource with id: ${resourceId}`)
-})
+router.get('/:id', loader.loadController(resourceName, 'show'))
 
-router.delete('/:id', (req, res) => {
-  const resourceId = req.params.id
-  res.send(`Using DELETE to resource with id: ${resourceId}`)
-})
+router.put('/:id', loader.loadController(resourceName, 'update'))
 
-router.post('/', (_req, res) => {
-  res.send('Using POST to resource')
-})
+router.delete('/:id', loader.loadController(resourceName, 'remove'))
+
+router.post('/', loader.loadController(resourceName, 'create'))
 
 module.exports = router
