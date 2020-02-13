@@ -23,7 +23,7 @@ PORT=8000
 ```
 
 ## API
-Currently project already have a v1 with a resource
+Currently project already have a V1 with a resource
 
 ``` shell
 POST   api/v1/resource Controllers/Resource#create
@@ -39,7 +39,7 @@ DELETE api/v1/resource Controllers/Resource#remove
 | PUT   | api/v1/resource/:id | respond with message including id |
 | DELETE   | api/v1/resource/:id | respond with message including id |
 
-## Add new resource to the current version
+## Add new Resource to the current version
 
 First will be necessary to create the routes adding a new file inside `src/config/routes/api/v1` using the name of the resource you want to create
 
@@ -52,3 +52,20 @@ Now will be necessary to create a Controller to manage requests, so create a new
 In this file you must modify the name of the class `Resource => YourResourceName` as well as the constant `resourceClass => YourResourceClassName`
 
 With this you must be ready to pick any of the endpoints mentioned above and make a request to your new resource.
+
+## Add new Version
+
+It is also pretty straightforward to add a new version. Just follow the steps below.
+
+Create a new folder, called `v[new_version]` inside `src/config/routes/api` and copy all files from `src/config/routes/api/v1`
+
+**Example: src/config/routes/api/v2**
+
+Then open your index.js and modify the `version` constant with the same name of the folder you just created.
+
+**Example: const version = 'v2'**
+
+And with this you must be ready to use your new version
+
+NOTES: Right now controllers are not versioned, but I will be adding them in the next months.
+
