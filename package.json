@@ -1,10 +1,11 @@
 {
   "name": "tutorial1",
-  "version": "1.0.0",
-  "description": "Application for platzi tutorial",
+  "version": "2.0.0",
+  "description": "Straightforward to modify NodeJS API",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "start": "node index.js"
   },
   "author": "German Reynaga Araiza",
   "license": "ISC",
