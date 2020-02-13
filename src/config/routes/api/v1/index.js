@@ -12,6 +12,7 @@ files.forEach(file => {
   // The route will have the same name as the file it is placed on
   const resourceNameParts = path.basename(file).split('.')
   const resourceName      = resourceNameParts[0]
+
   router.use(`/v1/${resourceName}`, versionEndpoints)
 })
 

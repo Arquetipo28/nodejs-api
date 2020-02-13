@@ -1,3 +1,5 @@
+const versions = require('./api')
+
 // Handlers
 const errorLoggerHandler = (err, _req, _res, next) => {
   console.error(err.stack)
@@ -20,17 +22,20 @@ const nonexistentRouteHandler = (_req, res, _next) => {
   res.status(404).json({ message: "Requested resource doesn't exist" })
 }
 
-module.exports = (app) => {
+
+const init = (server) => {
   // Initialize error handlers
-  app.use(errorLoggerHandler)
-  app.use(clientErrorHandler)
-  app.use(gravityErrorHandler)
+  server.use(errorLoggerHandler)
+  server.use(clientErrorHandler)
+  server.use(gravityErrorHandler)
 
   // This requires the entire endpoints
   // structured as folders inside
   // api/V[version]/index.js with endpoints
-  require('./api')(app)
+  versions.initVersionRoutes(server)
 
   // Prevent unmatched routes
-  app.use('*', nonexistentRouteHandler)
+  server.use('*', nonexistentRouteHandler)
 }
+
+module.exports = { init }

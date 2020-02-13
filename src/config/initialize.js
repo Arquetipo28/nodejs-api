@@ -3,17 +3,22 @@ const bodyParser = require('body-parser')
 const routes = require('./routes')
 
 function initialize (app) {
-  const create = () => {
-    app.use(logger('dev'))
-    app.use(bodyParser.json())
-    app.use(bodyParser.urlencoded({ extended: false }))
+  const server = app
+
+  const create = (config) => {
+    server.use(logger('dev'))
+    server.use(bodyParser.json())
+    server.use(bodyParser.urlencoded({ extended: false }))
+    // Set server configuration
+    server.set('port', config.port)
     // Add routes structure and handlers
-    routes(app)
+    routes.init(server)
   }
 
   const start = () => {
-    app.listen(3000, () => {
-      console.log('Server is listenning in port: 3000')
+    const port = server.get('port')
+    server.listen(port, () => {
+      console.log(`Server is listenning in port: ${port}`)
     })
   }
 
