@@ -3,6 +3,8 @@ const path = require('path')
 const express = require('express')
 var router = express.Router()
 
+const version = 'v1'
+
 const files = glob.sync(`${__dirname}/*.js`)
 files.forEach(file => {
   // Prevent version index importation
@@ -13,7 +15,7 @@ files.forEach(file => {
   const resourceNameParts = path.basename(file).split('.')
   const resourceName      = resourceNameParts[0]
 
-  router.use(`/v1/${resourceName}`, versionEndpoints)
+  router.use(`/${version}/${resourceName}`, versionEndpoints)
 })
 
 module.exports = router
