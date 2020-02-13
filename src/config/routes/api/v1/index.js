@@ -8,7 +8,10 @@ files.forEach(file => {
   if (file.includes('index.js')) return
 
   const versionEndpoints = require(path.resolve(file))
-  router.use('/v1', versionEndpoints)
+  // The route will have the same name as the file it is placed on
+  const resourceNameParts = path.basename(file).split('.')
+  const resourceName      = resourceNameParts[0]
+  router.use(`/v1/${resourceName}`, versionEndpoints)
 })
 
 module.exports = router
