@@ -15,6 +15,8 @@ router.get('/:id', loader.loadController(resourceName, 'show'))
 
 router.put('/:id', loader.loadController(resourceName, 'update'))
 
+// We are going to use 'remove' instead of 'delete'
+// to prevent Javascript Keyword errors
 router.delete('/:id', loader.loadController(resourceName, 'remove'))
 
 router.post('/', loader.loadController(resourceName, 'create'))

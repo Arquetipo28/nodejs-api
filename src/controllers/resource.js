@@ -2,6 +2,8 @@
 // the specified resource route
 // Example: users (resource), users.js (controller)
 
+// This must be named as your resource
+// Example 'Users'
 class Resource {
   static show (id) {
     return Promise.resolve(`Responding to GET resource ${id}`)
@@ -20,9 +22,13 @@ class Resource {
   }
 }
 
+// This must be named as your resource
+// Example 'Users'
+const resourceClass = Resource
+
 const show = (req, res) => {
   const { id } = req.params
-  Resource.show(id)
+  resourceClass.show(id)
     .then(success => {
       res.send(success)
     })
@@ -33,7 +39,7 @@ const show = (req, res) => {
 
 const update = (req, res) => {
   const { id } = req.params
-  Resource.update(id)
+  resourceClass.update(id)
     .then(success => {
       res.send(success)
     })
@@ -44,7 +50,7 @@ const update = (req, res) => {
 
 const remove = (req, res) => {
   const { id } = req.params
-  Resource.remove(id)
+  resourceClass.remove(id)
     .then(success => {
       res.send(success)
     })
@@ -55,7 +61,7 @@ const remove = (req, res) => {
 
 const create = (req, res) => {
   const { data } = req.body
-  Resource.create(data)
+  resourceClass.create(data)
     .then(success => {
       res.send(success)
     })
